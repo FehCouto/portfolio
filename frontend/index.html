@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfólio | Seu Nome</title>
+
+    <!-- Ícones de tecnologias (Devicons) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
+    <!-- Font Awesome para ícones gerais -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- Google Fonts - Circular (similar ao Spotify usa) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <!-- =============================================
+         LAYOUT PRINCIPAL (3 partes como o Spotify):
+         1. Sidebar esquerda
+         2. Conteúdo principal
+         3. Barra inferior "Now Playing"
+    ============================================= -->
+
+    <!-- SIDEBAR ESQUERDA -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <span class="logo-icon">{ }</span>
+            <span class="logo-text">DevFolio</span>
+        </div>
+
+        <ul class="nav-menu">
+            <li class="nav-item active" data-section="home">
+                <i class="fas fa-home"></i>
+                <span>Início</span>
+            </li>
+            <li class="nav-item" data-section="projects">
+                <i class="fas fa-code"></i>
+                <span>Projetos</span>
+            </li>
+            <li class="nav-item" data-section="skills">
+                <i class="fas fa-guitar"></i>
+                <span>Skills</span>
+            </li>
+            <li class="nav-item" data-section="about">
+                <i class="fas fa-user"></i>
+                <span>Sobre</span>
+            </li>
+            <li class="nav-item" data-section="contact">
+                <i class="fas fa-envelope"></i>
+                <span>Contato</span>
+            </li>
+        </ul>
+
+        <!-- Playlists (projetos em destaque) — preenchido via JS -->
+        <div class="sidebar-section">
+            <p class="sidebar-label">PLAYLISTS</p>
+            <ul class="playlist-list" id="playlist-list">
+                <li class="playlist-loading">Carregando...</li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content" id="main-content">
+
+        <!-- ---- SEÇÃO: HOME ---- -->
+        <section class="section active" id="section-home">
+            <div class="hero">
+                <div class="hero-greeting">Bom dia ☀️</div>
+                <div class="hero-cards" id="hero-cards">
+                    <!-- Cards rápidos (carregados via JS) -->
+                </div>
+                <div class="hero-featured">
+                    <h2 class="section-title">Em destaque</h2>
+                    <div class="cards-grid" id="featured-projects">
+                        <!-- Projetos em destaque (carregados via JS) -->
+                    </div>
+                </div>
+                <div class="hero-skills-preview">
+                    <h2 class="section-title">Minhas Skills</h2>
+                    <div class="skills-grid" id="skills-preview">
+                        <!-- Skills preview (carregadas via JS) -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ---- SEÇÃO: PROJETOS ---- -->
+        <section class="section" id="section-projects">
+            <div class="section-header-gradient" style="--gradient-color: #1DB954;"></div>
+            <h1 class="page-title">Meus Projetos</h1>
+            <p class="page-subtitle">Cada projeto é uma faixa na minha playlist de aprendizado.</p>
+            <div class="cards-grid large" id="all-projects">
+                <!-- Todos os projetos (carregados via JS) -->
+            </div>
+        </section>
+
+        <!-- ---- SEÇÃO: SKILLS ---- -->
+        <section class="section" id="section-skills">
+            <div class="section-header-gradient" style="--gradient-color: #8B5CF6;"></div>
+            <h1 class="page-title">Skills</h1>
+            <p class="page-subtitle">As tecnologias que compõem meu repertório.</p>
+
+            <div id="skills-by-category">
+                <!-- Skills agrupadas por categoria (carregadas via JS) -->
+            </div>
+        </section>
+
+        <!-- ---- SEÇÃO: SOBRE ---- -->
+        <section class="section" id="section-about">
+            <div class="section-header-gradient" style="--gradient-color: #3B82F6;"></div>
+            <div class="about-profile" id="about-profile">
+                <!-- Perfil (carregado via JS) -->
+            </div>
+        </section>
+
+        <!-- ---- SEÇÃO: CONTATO ---- -->
+        <section class="section" id="section-contact">
+            <div class="section-header-gradient" style="--gradient-color: #EF4444;"></div>
+            <h1 class="page-title">Contato</h1>
+            <p class="page-subtitle">Vamos construir algo juntos?</p>
+            <div class="contact-content" id="contact-content">
+                <!-- Contato (carregado via JS) -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- BARRA INFERIOR "NOW PLAYING" -->
+    <footer class="now-playing-bar" id="now-playing-bar">
+        <!-- Info da faixa atual -->
+        <div class="np-track-info">
+            <div class="np-cover" id="np-cover">
+                <span>{ }</span>
+            </div>
+            <div class="np-details">
+                <span class="np-track-name" id="np-track-name">Carregando...</span>
+                <span class="np-artist" id="np-artist">...</span>
+            </div>
+            <i class="far fa-heart np-like"></i>
+        </div>
+
+        <!-- Controles do player -->
+        <div class="np-controls">
+            <div class="np-buttons">
+                <i class="fas fa-random np-btn"></i>
+                <i class="fas fa-step-backward np-btn"></i>
+                <button class="np-play-btn" id="np-play-btn">
+                    <i class="fas fa-play"></i>
+                </button>
+                <i class="fas fa-step-forward np-btn"></i>
+                <i class="fas fa-redo np-btn"></i>
+            </div>
+            <div class="np-progress">
+                <span class="np-time">0:00</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <span class="np-time" id="np-duration">--:--</span>
+            </div>
+        </div>
+
+        <!-- Volume -->
+        <div class="np-volume">
+            <i class="fas fa-volume-up"></i>
+            <div class="volume-bar">
+                <div class="volume-fill" style="width: 70%"></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Menu mobile (hambúrguer) -->
+    <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Normaliza line endings: repositório usa LF (Unix)
+# Isso evita problemas nos arquivos do Docker rodando em Linux
+* text=auto eol=lf
+
+# Binários não devem ser convertidos
+*.jar binary
+*.png binary
+*.jpg binary
+*.gif binary

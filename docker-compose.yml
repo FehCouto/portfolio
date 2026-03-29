@@ -1,0 +1,46 @@
+# =============================================
+# Docker Compose — Orquestra todos os containers
+# =============================================
+# O docker-compose.yml define todos os serviços da aplicação.
+# Com um único comando (docker compose up) tudo sobe junto.
+
+version: '3.8'
+
+services:
+
+  # ---- CONTAINER 1: Backend Java ----
+  backend:
+    build:
+      context: ./backend   # Pasta onde está o Dockerfile do backend
+    container_name: portfolio-backend
+    ports:
+      - "8080:8080"        # Porta local:porta container (para acesso direto à API)
+    networks:
+      - portfolio-network
+    # Reinicia automaticamente se cair (útil em produção)
+    restart: unless-stopped
+    # Healthcheck: Docker verifica se a API está respondendo
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/api/about"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ---- CONTAINER 2: Frontend Nginx ----
+  frontend:
+    build:
+      context: ./frontend  # Pasta onde está o Dockerfile do frontend
+    container_name: portfolio-frontend
+    ports:
+      - "3000:80"          # Acesse em http://localhost:3000
+    depends_on:
+      - backend            # Sobe o backend antes do frontend
+    networks:
+      - portfolio-network
+    restart: unless-stopped
+
+# Rede interna para os containers se comunicarem pelo nome do serviço
+# (é assim que o nginx consegue chamar "http://backend:8080")
+networks:
+  portfolio-network:
+    driver: bridge
