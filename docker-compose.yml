@@ -33,6 +33,10 @@ services:
     container_name: portfolio-frontend
     ports:
       - "3000:80"          # Acesse em http://localhost:3000
+    environment:
+      # Localmente, o backend é acessado pelo nome do serviço Docker
+      # No Railway, esta variável é sobrescrita pelo painel da plataforma
+      - BACKEND_URL=http://backend:8080
     depends_on:
       - backend            # Sobe o backend antes do frontend
     networks:

@@ -6,14 +6,12 @@
 # Imagem base: Nginx em versão Alpine (super leve, só ~5MB)
 FROM nginx:alpine
 
-# Remove a configuração padrão do Nginx e coloca a nossa
-RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/conf.d/
+# A imagem oficial do nginx processa automaticamente qualquer arquivo
+# em /etc/nginx/templates/*.template, substituindo variáveis de ambiente
+# (ex: ${BACKEND_URL}) antes de iniciar — sem precisar de scripts extras.
+COPY nginx.conf /etc/nginx/templates/default.conf.template
 
 # Copia os arquivos do frontend para onde o Nginx serve
 COPY . /usr/share/nginx/html/
 
-# Expõe a porta 80 (porta padrão HTTP)
 EXPOSE 80
-
-# Nginx já inicia automaticamente com a imagem base
